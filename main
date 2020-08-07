@@ -1,0 +1,27 @@
+import os
+
+listAllValues = [] #список с начальными значениями
+
+with open('спецификация0406.txt', 'r') as TEST_TEXT:
+    for line in TEST_TEXT:
+        line = line.strip()
+        if 'Лаз. рез.' in line: #добавляет позиции, в которох указана лазерная резка
+            listAllValues.append(line)
+
+listValues = [] #чистый список с 4 столбцами
+
+for i in listAllValues:
+    listCurrentValues = [] #список с текущим значением столбца
+    for j in i.split('\t'):
+        listCurrentValues.append(j)
+    listValues.append(listCurrentValues)
+
+for i in listValues:
+    print(i)
+
+listFilesInDir = os.listdir(path=".") #список файлов в папке
+
+for names in listValues:
+    if (names[1]+'.dxf') in listFilesInDir:
+        os.rename(names[1]+'.dxf', names[1] + ' ' + 'сталь3' + 'Т=' + names[3] + ' ' + names[2] + ' шт.''dxf')
+
